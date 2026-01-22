@@ -3,175 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PotterApp</title>
+    <title>The Hogwarts Archives</title>
     <style>
-        /* Base Styling */
+        /* Global Styles */
         :root {
-            --maroon: #740001;
-            --gold: #e3a000;
-            --dark: #1a1a1a;
-            --cream: #fdf5e6;
+            --gryffindor: #740001;
+            --gold: #D3A625;
+            --parchment: #f4e4bc;
+            --ink: #2a2115;
+            --slytherin: #1a472a;
         }
 
         body {
+            background-color: #121212; /* Dark stone floor feel */
+            color: var(--ink);
+            font-family: 'Georgia', serif;
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark);
-            color: var(--cream);
-            display: flex;
-            justify-content: center;
+            line-height: 1.6;
         }
 
-        /* App Container (Mobile Viewport) */
-        .app-shell {
-            width: 100%;
-            max-width: 400px;
-            height: 100vh;
-            background-color: #222;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-        }
-
-        /* Header */
-        header {
-            background-color: var(--maroon);
-            padding: 20px;
+        /* Navigation */
+        nav {
+            background: var(--gryffindor);
+            padding: 1rem;
             text-align: center;
-            border-bottom: 3px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        nav a {
+            color: var(--gold);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Hero Section */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1551269901-5c5e14c25df7?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
         }
 
         header h1 {
+            font-size: 4rem;
+            text-shadow: 0 0 20px var(--gold);
             margin: 0;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            color: var(--gold);
         }
 
-        /* Scrollable Content */
-        .content {
-            flex: 1;
-            overflow-y: auto;
+        /* Main Content Container */
+        .container {
+            max-width: 900px;
+            margin: -50px auto 50px; /* Overlap the hero */
+            background: var(--parchment);
+            padding: 50px;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--ink);
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        /* House Cards */
+        .house-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .house-card {
             padding: 20px;
-            padding-bottom: 80px; /* Space for nav */
-        }
-
-        .card {
-            background: #333;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-left: 5px solid var(--gold);
-        }
-
-        .card h3 {
-            margin-top: 0;
-            color: var(--gold);
-        }
-
-        .house-tags {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .tag {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .gryffindor { background: #740001; color: #e3a000; }
-        .slytherin { background: #1a472a; color: #aaa67d; }
-        .ravenclaw { background: #0e1a40; color: #946b2d; }
-        .hufflepuff { background: #ecb939; color: #372e29; }
-
-        /* Navigation Bar */
-        nav {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 65px;
-            background: #111;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border-top: 1px solid #444;
-        }
-
-        .nav-item {
-            color: #888;
-            text-decoration: none;
-            font-size: 0.75rem;
+            border: 2px solid #ccc;
             text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: rgba(255,255,255,0.3);
         }
 
-        .nav-item.active {
+        .house-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-color: var(--gold);
+        }
+
+        /* Spell List Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background: var(--ink);
             color: var(--gold);
+            padding: 10px;
+            text-align: left;
         }
 
-        .icon {
-            font-size: 1.2rem;
-            display: block;
-            margin-bottom: 2px;
+        td {
+            padding: 10px;
+            border-bottom: 1px dashed var(--ink);
         }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="app-shell">
-        <header>
-            <h1>HOGWARTS PORTAL</h1>
-        </header>
+    <nav>
+        <a href="#about">The Books</a>
+        <a href="#houses">Houses</a>
+        <a href="#spells">Spell Book</a>
+    </nav>
 
-        <main class="content">
-            <div class="house-tags">
-                <span class="tag gryffindor">Gryffindor</span>
-                <span class="tag slytherin">Slytherin</span>
-                <span class="tag ravenclaw">Ravenclaw</span>
-                <span class="tag hufflepuff">Hufflepuff</span>
+    <header>
+        <div>
+            <h1>The Hogwarts Archives</h1>
+            <p>Unlocking the magic of the boy who lived.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section id="about">
+            <h2>About the Saga</h2>
+            <p>First published in 1997, <em>Harry Potter and the Philosopher's Stone</em> introduced us to a world of owls, wands, and ancient magic. The series spans seven books, documenting the struggle between Harry Potter and the Dark Lord Voldemort.</p>
+            <blockquote>"It does not do to dwell on dreams and forget to live." — Albus Dumbledore</blockquote>
+        </section>
+
+        <section id="houses">
+            <h2>Choose Your House</h2>
+            <div class="house-grid">
+                <div class="house-card" style="color: var(--gryffindor)">
+                    <h3>Gryffindor</h3>
+                    <p>Courage, bravery, and determination.</p>
+                </div>
+                <div class="house-card" style="color: var(--slytherin)">
+                    <h3>Slytherin</h3>
+                    <p>Ambition, cunning, and resourcefulness.</p>
+                </div>
+                <div class="house-card" style="color: #00325d">
+                    <h3>Ravenclaw</h3>
+                    <p>Wit, learning, and wisdom.</p>
+                </div>
+                <div class="house-card" style="color: #603e1f">
+                    <h3>Hufflepuff</h3>
+                    <p>Patience, loyalty, and fair play.</p>
+                </div>
             </div>
+        </section>
 
-            <section>
-                <h2>Daily Prophet Highlights</h2>
-                <div class="card">
-                    <h3>The Boy Who Lived</h3>
-                    <p>Harry Potter enters his fifth year at Hogwarts. Rumors circulate about the return of "You-Know-Who".</p>
-                </div>
+        <section id="spells">
+            <h2>Advanced Spellbook</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Incantation</th>
+                        <th>Effect</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Expecto Patronum</strong></td>
+                        <td>Conjures a spirit guardian against Dementors.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Expelliarmus</strong></td>
+                        <td>Disarms an opponent.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lumos</strong></td>
+                        <td>Creates light at the tip of the wand.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Wingardium Leviosa</strong></td>
+                        <td>Makes objects fly (swish and flick!).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-                <div class="card">
-                    <h3>Quidditch Results</h3>
-                    <p>Gryffindor beats Slytherin in a nail-biting finish! Harry catches the snitch in record time.</p>
-                </div>
-
-                <div class="card">
-                    <h3>New Charms Class</h3>
-                    <p>Professor Flitwick introduces the "Aguamenti" spell this week. Don't forget your wands!</p>
-                </div>
-            </section>
-        </main>
-
-        <nav>
-            <a href="#" class="nav-item active">
-                <span class="icon">🏰</span>
-                Home
-            </a>
-            <a href="#" class="nav-item">
-                <span class="icon">📜</span>
-                Spells
-            </a>
-            <a href="#" class="nav-item">
-                <span class="icon">🦉</span>
-                Owlery
-            </a>
-            <a href="#" class="nav-item">
-                <span class="icon">⚙️</span>
-                Settings
-            </a>
-        </nav>
     </div>
+
+    <footer>
+        <p>Created for Witches, Wizards, and Squibs alike. | 2026 PotterFan Project</p>
+    </footer>
 
 </body>
 </html>
